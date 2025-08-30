@@ -3,6 +3,7 @@ Flask JWT Backend
 A full-featured Flask backend with JWT authentication for tracking travel expenses (Travel, Lodging, Food). 
 This backend provides a secure RESTful API for user authentication and expense management.
 
+
 Features
   - JWT Authentication: Secure user registration, login, and session management
   - Expense Tracking: CRUD operations for travel, lodging, and food expenses
@@ -10,6 +11,7 @@ Features
   - Protected Routes: All endpoints require valid JWT authentication
   - SQLite Database: Lightweight database with Flask-SQLAlchemy ORM
   - CORS Support: Configured for frontend-backend communication
+
 
 Installation & Setup
   Prerequisites
@@ -56,14 +58,15 @@ API Usage Examples
     -H "Content-Type: application/json" \
     -d '{"username":"testuser","password":"password123"}'  
 
-  Get Expenses (with Pagination)
-    curl -X GET http://localhost:5555/expenses?page=1&per_page=5 \
-    -H "Authorization: Bearer <your-jwt-token>"
-
-  curl -X POST http://localhost:5555/expenses \
+  Create Expense
+    curl -X POST http://localhost:5555/expenses \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer <your-jwt-token>" \
     -d '{"category":"Travel","amount":150.75,"description":"Flight to NYC"}'
+
+  Get Expenses (with Pagination)
+    curl -X GET "http://localhost:5555/expenses?page=1&per_page=5" -H "Authorization: Bearer <your-jwt-token>"
+
 
 API Endpoints
   Authentication
