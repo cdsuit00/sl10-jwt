@@ -17,7 +17,7 @@ Installation & Setup
   - pip (Python package manager)
 
 1. Clone the repository
-    git clone <your-repo-url>
+    git clone git@github.com:cdsuit00/sl10-jwt.git
 
 2. Create and activate virtual environment
     python -m venv venv
