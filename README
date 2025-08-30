@@ -1,0 +1,79 @@
+Flask JWT Backend
+
+A full-featured Flask backend with JWT authentication for tracking travel expenses (Travel, Lodging, Food). 
+This backend provides a secure RESTful API for user authentication and expense management.
+
+Features
+  - JWT Authentication: Secure user registration, login, and session management
+  - Expense Tracking: CRUD operations for travel, lodging, and food expenses
+  - Pagination: Efficient data retrieval with pagination support
+  - Protected Routes: All endpoints require valid JWT authentication
+  - SQLite Database: Lightweight database with Flask-SQLAlchemy ORM
+  - CORS Support: Configured for frontend-backend communication
+
+Installation & Setup
+  Prerequisites
+  - Python 3.8+
+  - pip (Python package manager)
+
+1. Clone the repository
+    git clone <your-repo-url>
+
+2. Create and activate virtual environment
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate 
+
+3. Install dependencies
+    pip install -r requirements.txt
+
+4. Initialize database
+    # Set Flask app
+    export FLASK_APP=app.py
+
+    # Initialize migrations
+    flask db init
+    flask db migrate -m "Initial migration"
+    flask db upgrade
+
+    # Seed with sample data
+    python seed.py
+
+5. Run the application
+    # Development server
+    python app.py
+    # or
+    flask run --port=5555
+
+
+API Usage Examples
+  User Registration
+    curl -X POST http://localhost:5555/signup \
+    -H "Content-Type: application/json" \
+    -d '{"username":"testuser","password":"password123","password_confirmation":"password123"}'
+
+  User Login
+    curl -X POST http://localhost:5555/login \
+    -H "Content-Type: application/json" \
+    -d '{"username":"testuser","password":"password123"}'  
+
+  Get Expenses (with Pagination)
+    curl -X GET http://localhost:5555/expenses?page=1&per_page=5 \
+    -H "Authorization: Bearer <your-jwt-token>"
+
+  curl -X POST http://localhost:5555/expenses \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <your-jwt-token>" \
+    -d '{"category":"Travel","amount":150.75,"description":"Flight to NYC"}'
+
+API Endpoints
+  Authentication
+   - POST /signup - Register a new user
+   - POST /login - Authenticate existing user
+   - GET /me - Get current user information
+
+  Expenses
+   - GET /expenses - Get paginated expenses (supports ?page=1&per_page=10)
+   - POST /expenses - Create a new expense
+   - GET /expenses/<id> - Get specific expense
+   - PATCH /expenses/<id> - Update an expense
+   - DELETE /expenses/<id> - Delete an expense
